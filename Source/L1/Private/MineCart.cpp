@@ -5,6 +5,8 @@
 
 void AMineCart::FillCartWithActors(const TSet<TSubclassOf<AActor>>& Actors, int Count)
 {
+	if (!bFilled) return;
+
 	UWorld* World{ GetWorld() };
 	if (!World) return;
 

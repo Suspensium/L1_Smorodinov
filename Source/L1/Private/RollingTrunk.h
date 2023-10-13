@@ -14,7 +14,7 @@ class ARollingTrunk : public AActor
 
 	FTimerHandle TrunkSpawnHandle{};
 
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere)
 	// How often in seconds should trunks spawn
 	float SpawnTime{ 5.f };
 	UPROPERTY(EditDefaultsOnly)
