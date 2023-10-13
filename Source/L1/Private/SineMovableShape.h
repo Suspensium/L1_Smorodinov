@@ -10,13 +10,16 @@ UCLASS()
 class ASineMovableShape : public ABaseMovableShape
 {
 	GENERATED_BODY()
-protected:
 
-	UPROPERTY(EditAnywhere, Category="Movement")
-	float Amplitude{};
+protected:
+	UPROPERTY(EditAnywhere, Category = "Movement")
+	float Amplitude{ 10.f };
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float Frequency{};
+	float Frequency{ 5.f };
 
-	virtual void Move(float Amplitude, float Frequency, FVector Direction, float DeltaTime) override;
+	virtual void Move(FVector Direction, float DeltaTime) override;
+
+public:
+	ASineMovableShape();
 };

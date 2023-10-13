@@ -24,8 +24,7 @@ void ABaseMovableShape::BeginPlay()
 
 void ABaseMovableShape::HandleMovement(float DeltaTime)
 {
-	if (!EndPoint) return;
-	if (!ColliderComponent) return;
+	if (!EndPoint || !ColliderComponent) return;
 
 	// Calculate the direction to the EndPoint
 	FVector Direction = EndPoint->GetActorLocation() - GetActorLocation();
@@ -37,7 +36,7 @@ void ABaseMovableShape::HandleMovement(float DeltaTime)
 void ABaseMovableShape::Move(FVector Direction, float DeltaTime)
 {
 	// Apply force to mesh to move it
-	ColliderComponent->AddForce(MovementSpeed * 10000.f * Direction * DeltaTime);
+	ColliderComponent->AddForce(MovementSpeed * 100000.f * Direction * DeltaTime);
 }
 
 void ABaseMovableShape::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult)

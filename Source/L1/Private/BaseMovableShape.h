@@ -29,7 +29,7 @@ protected:
 
 	UFUNCTION(BlueprintCallable, Category = "Movement")
 	// Called to move towards EndPoint
-	void HandleMovement(float DeltaTime);
+	virtual void HandleMovement(float DeltaTime);
 
 	virtual void Move(FVector Direction, float DeltaTime);
 
