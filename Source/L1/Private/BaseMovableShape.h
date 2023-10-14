@@ -31,7 +31,7 @@ protected:
 	// Called to move towards EndPoint
 	virtual void HandleMovement(float DeltaTime);
 
-	virtual void Move(FVector Direction, float DeltaTime);
+	virtual void Move(const FVector& Direction, float DeltaTime);
 
 	UFUNCTION()
 	void OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AActor* OtherActor, UPrimitiveComponent* OtherComp, int32 OtherBodyIndex, bool bFromSweep, const FHitResult& SweepResult);

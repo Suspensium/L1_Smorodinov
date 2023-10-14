@@ -4,22 +4,24 @@
 
 #include "CoreMinimal.h"
 #include "BaseMovableShape.h"
-#include "SineMovableShape.generated.h"
+#include "SpiralMovableShape.generated.h"
 
 UCLASS()
-class ASineMovableShape : public ABaseMovableShape
+class ASpiralMovableShape : public ABaseMovableShape
 {
 	GENERATED_BODY()
 
 protected:
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float Amplitude{ 10.f };
+	float Radius{ 300.f };
 
 	UPROPERTY(EditAnywhere, Category = "Movement")
-	float Frequency{ 5.f };
+	float RotationSpeed{ 300.f };
+
+	virtual void BeginPlay() override;
 
 	virtual void Move(const FVector& Direction, float DeltaTime) override;
 
 public:
-	ASineMovableShape();
+	ASpiralMovableShape();
 };

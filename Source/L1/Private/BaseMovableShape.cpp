@@ -9,7 +9,6 @@ ABaseMovableShape::ABaseMovableShape()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
 	PrimaryActorTick.bCanEverTick = true;
-
 }
 
 // Called when the game starts or when spawned
@@ -33,7 +32,7 @@ void ABaseMovableShape::HandleMovement(float DeltaTime)
 	Move(Direction, DeltaTime);
 }
 
-void ABaseMovableShape::Move(FVector Direction, float DeltaTime)
+void ABaseMovableShape::Move(const FVector& Direction, float DeltaTime)
 {
 	// Apply force to mesh to move it
 	ColliderComponent->AddForce(MovementSpeed * 100000.f * Direction * DeltaTime);
@@ -49,6 +48,4 @@ void ABaseMovableShape::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AAct
 void ABaseMovableShape::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-
 }
-
