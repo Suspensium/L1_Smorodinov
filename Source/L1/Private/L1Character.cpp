@@ -18,7 +18,7 @@ AL1Character::AL1Character()
 {
 	// Set size for collision capsule
 	GetCapsuleComponent()->InitCapsuleSize(42.f, 96.0f);
-		
+
 	// Don't rotate when the controller rotates. Let that just affect the camera.
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
@@ -73,17 +73,21 @@ void AL1Character::SetupPlayerInputComponent(class UInputComponent* PlayerInputC
 {
 	// Set up action bindings
 	if (UEnhancedInputComponent* EnhancedInputComponent = CastChecked<UEnhancedInputComponent>(PlayerInputComponent)) {
-		
-		//Jumping
+
+		// Jumping
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Triggered, this, &ACharacter::Jump);
 		EnhancedInputComponent->BindAction(JumpAction, ETriggerEvent::Completed, this, &ACharacter::StopJumping);
 
-		//Moving
+		// Moving
 		EnhancedInputComponent->BindAction(MoveAction, ETriggerEvent::Triggered, this, &AL1Character::Move);
 
-		//Looking
+		// Looking
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AL1Character::Look);
 
+		// Spawning actors
+		EnhancedInputComponent->BindAction(SpawnBaseActorAction, ETriggerEvent::Completed, this, &AL1Character::SpawnBaseActor);
+		EnhancedInputComponent->BindAction(SpawnSineActorAction, ETriggerEvent::Completed, this, &AL1Character::SpawnSineActor);
+		EnhancedInputComponent->BindAction(SpawnSpiralActorAction, ETriggerEvent::Completed, this, &AL1Character::SpawnSpiralActor);
 	}
 
 }
@@ -101,7 +105,7 @@ void AL1Character::Move(const FInputActionValue& Value)
 
 		// get forward vector
 		const FVector ForwardDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::X);
-	
+
 		// get right vector 
 		const FVector RightDirection = FRotationMatrix(YawRotation).GetUnitAxis(EAxis::Y);
 
@@ -124,6 +128,15 @@ void AL1Character::Look(const FInputActionValue& Value)
 	}
 }
 
-
-
-
+void AL1Character::SpawnBaseActor(const FInputActionValue& Value)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SpawnBaseActor"));
+}
+void AL1Character::SpawnSineActor(const FInputActionValue& Value)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SpawnSineActor"));
+}
+void AL1Character::SpawnSpiralActor(const FInputActionValue& Value)
+{
+	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SpawnSpiralActor"));
+}
