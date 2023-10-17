@@ -2,7 +2,6 @@
 
 
 #include "BaseMovableShape.h"
-#include "Components/SphereComponent.h"
 
 // Sets default values
 ABaseMovableShape::ABaseMovableShape()
@@ -23,7 +22,7 @@ void ABaseMovableShape::BeginPlay()
 
 void ABaseMovableShape::HandleMovement(float DeltaTime)
 {
-	if (!EndPoint || !ColliderComponent) return;
+	if (!bMoving || !EndPoint || !ColliderComponent) return;
 
 	// Calculate the direction to the EndPoint
 	FVector Direction = EndPoint->GetActorLocation() - GetActorLocation();
@@ -42,4 +41,6 @@ void ABaseMovableShape::OnOverlapBegin(UPrimitiveComponent* OverlappedComp, AAct
 void ABaseMovableShape::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
+
+	HandleMovement(DeltaTime);
 }

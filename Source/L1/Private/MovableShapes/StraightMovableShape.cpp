@@ -6,5 +6,5 @@
 void AStraightMovableShape::Move(const FVector& Direction, float DeltaTime)
 {
 	// Apply force to mesh to move it
-	ColliderComponent->AddForce(MovementSpeed * SPEED_MODIFIER * Direction * DeltaTime);
+	ColliderComponent->AddForce(MovementSpeed * FORCE_MODIFIER * Direction * DeltaTime);
 }

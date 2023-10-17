@@ -2,7 +2,6 @@
 
 
 #include "SpiralMovableShape.h"
-#include "Components/SphereComponent.h"
 
 void ASpiralMovableShape::BeginPlay()
 {

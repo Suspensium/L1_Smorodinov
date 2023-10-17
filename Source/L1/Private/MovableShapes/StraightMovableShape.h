@@ -12,7 +12,7 @@ class AStraightMovableShape : public ABaseMovableShape
 	GENERATED_BODY()
 
 private:
-	const float SPEED_MODIFIER{ 100000.f };
+	const float FORCE_MODIFIER{ 100000.f };
 
 	virtual void Move(const FVector& Direction, float DeltaTime) override;
 };

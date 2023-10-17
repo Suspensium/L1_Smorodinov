@@ -2,7 +2,6 @@
 
 
 #include "SineMovableShape.h"
-#include "Components/SphereComponent.h"
 
 void ASineMovableShape::Move(const FVector& Direction, float DeltaTime)
 {
