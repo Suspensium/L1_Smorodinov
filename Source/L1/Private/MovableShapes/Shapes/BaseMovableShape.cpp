@@ -10,6 +10,11 @@ ABaseMovableShape::ABaseMovableShape()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+void ABaseMovableShape::SetEndPoint(TObjectPtr<AActor> p_EndPoint)
+{
+	EndPoint = p_EndPoint;
+}
+
 // Called when the game starts or when spawned
 void ABaseMovableShape::BeginPlay()
 {

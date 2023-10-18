@@ -17,7 +17,7 @@ protected:
 	UPROPERTY(EditAnywhere, Category = "Movement")
 	float MovementSpeed{ 100.f };
 
-	UPROPERTY(EditInstanceOnly, BlueprintReadOnly, Category = "Movement")
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Movement")
 	// Actor's movement end point
 	TObjectPtr<AActor> EndPoint;
 
@@ -40,6 +40,8 @@ protected:
 public:
 	// Sets default values for this actor's properties
 	ABaseMovableShape();
+
+	void SetEndPoint(TObjectPtr<AActor> p_EndPoint);
 
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;

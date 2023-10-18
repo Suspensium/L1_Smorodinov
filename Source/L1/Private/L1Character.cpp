@@ -9,11 +9,12 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
+#include "MovableShapes/FactoryUtility.h"
+#include "MovableShapes/Creators/MovableStraightShapesFactory.h"
+#include "MovableShapes/Creators/MovableSineShapesFactory.h"
+#include "MovableShapes/Creators/MovableSpiralShapesFactory.h"
 
-
-//////////////////////////////////////////////////////////////////////////
-// AL1Character
-
+#pragma region Constructors
 AL1Character::AL1Character()
 {
 	// Set size for collision capsule
@@ -65,10 +66,9 @@ void AL1Character::BeginPlay()
 		}
 	}
 }
+#pragma endregion Constructors
 
-//////////////////////////////////////////////////////////////////////////
-// Input
-
+#pragma region Inputs
 void AL1Character::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	// Set up action bindings
@@ -85,7 +85,7 @@ void AL1Character::SetupPlayerInputComponent(class UInputComponent* PlayerInputC
 		EnhancedInputComponent->BindAction(LookAction, ETriggerEvent::Triggered, this, &AL1Character::Look);
 
 		// Spawning actors
-		EnhancedInputComponent->BindAction(SpawnBaseActorAction, ETriggerEvent::Completed, this, &AL1Character::SpawnBaseActor);
+		EnhancedInputComponent->BindAction(SpawnStraightActorAction, ETriggerEvent::Completed, this, &AL1Character::SpawnStraightActor);
 		EnhancedInputComponent->BindAction(SpawnSineActorAction, ETriggerEvent::Completed, this, &AL1Character::SpawnSineActor);
 		EnhancedInputComponent->BindAction(SpawnSpiralActorAction, ETriggerEvent::Completed, this, &AL1Character::SpawnSpiralActor);
 	}
@@ -128,15 +128,16 @@ void AL1Character::Look(const FInputActionValue& Value)
 	}
 }
 
-void AL1Character::SpawnBaseActor(const FInputActionValue& Value)
+void AL1Character::SpawnStraightActor(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SpawnBaseActor"));
+	FactoryUtility::SpawnMovableShapeActor(AMovableStraightShapesFactory::StaticClass(), GetWorld(), this);
 }
 void AL1Character::SpawnSineActor(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SpawnSineActor"));
+	FactoryUtility::SpawnMovableShapeActor(AMovableSineShapesFactory::StaticClass(), GetWorld(), this);
 }
 void AL1Character::SpawnSpiralActor(const FInputActionValue& Value)
 {
-	GEngine->AddOnScreenDebugMessage(-1, 15.0f, FColor::Red, TEXT("SpawnSpiralActor"));
+	FactoryUtility::SpawnMovableShapeActor(AMovableSpiralShapesFactory::StaticClass(), GetWorld(), this);
 }
+#pragma endregion Inputs

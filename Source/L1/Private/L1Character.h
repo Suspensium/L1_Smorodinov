@@ -39,7 +39,7 @@ class AL1Character : public ACharacter
 
 	/** Spawn actors Input Actions */
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
-	class UInputAction* SpawnBaseActorAction;
+	class UInputAction* SpawnStraightActorAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
 	class UInputAction* SpawnSineActorAction;
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = Input, meta = (AllowPrivateAccess = "true"))
@@ -58,7 +58,7 @@ protected:
 	void Look(const FInputActionValue& Value);
 
 	/** Called for spawning actors input */
-	void SpawnBaseActor(const FInputActionValue& Value);
+	void SpawnStraightActor(const FInputActionValue& Value);
 	void SpawnSineActor(const FInputActionValue& Value);
 	void SpawnSpiralActor(const FInputActionValue& Value);
 

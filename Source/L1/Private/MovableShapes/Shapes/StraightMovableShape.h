@@ -3,7 +3,7 @@
 #pragma once
 
 #include "CoreMinimal.h"
-#include "MovableShapes/BaseMovableShape.h"
+#include "BaseMovableShape.h"
 #include "StraightMovableShape.generated.h"
 
 UCLASS()

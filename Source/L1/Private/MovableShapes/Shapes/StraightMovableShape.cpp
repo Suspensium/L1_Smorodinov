@@ -1,7 +1,7 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 
-#include "MovableShapes/StraightMovableShape.h"
+#include "StraightMovableShape.h"
 
 void AStraightMovableShape::Move(const FVector& Direction, float DeltaTime)
 {
