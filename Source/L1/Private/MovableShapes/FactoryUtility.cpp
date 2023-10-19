@@ -20,13 +20,17 @@ bool FactoryUtility::SpawnMovableShapeActor(const TSubclassOf<AMovableShapesFact
 			NewShape = Factory->CreateShape_Implementation(EndPointActor);
 			if (!NewShape) return false;
 		}
-
 #if WITH_EDITOR
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Green, TEXT("Spawn Actor"));
+#endif
 	}
 	else
+	{
+#if WITH_EDITOR
 		GEngine->AddOnScreenDebugMessage(-1, 3.f, FColor::Red, TEXT("Factory not found"));
 #endif
+		return false;
+	}
 
 	return true;
 }
