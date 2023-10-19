@@ -9,11 +9,11 @@ bool FactoryUtility::SpawnMovableShapeActor(const TSubclassOf<AMovableShapesFact
 {
 	if (!FactoryClass || !World || !EndPointActor) return false;
 
-	AMovableShapesFactory* Factory = GetFactory(FactoryClass, World);
+	TObjectPtr<AMovableShapesFactory> Factory = GetFactory(FactoryClass, World);
 
 	if (Factory)
 	{
-		ABaseMovableShape* NewShape = Factory->CreateShape(EndPointActor);
+		TObjectPtr<ABaseMovableShape> NewShape = Factory->CreateShape(EndPointActor);
 		if (!NewShape)
 		{
 			// If no implementation in blueprints use C++
