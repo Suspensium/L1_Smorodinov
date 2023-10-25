@@ -12,6 +12,9 @@ class AMovableShapesFactory : public AActor
 {
 	GENERATED_BODY()
 
+private:
+	static AMovableShapesFactory* GetFactory(const TSubclassOf<AMovableShapesFactory>& FactoryClass, const UWorld* World);
+
 public:
 	// Sets default values for this actor's properties
 	AMovableShapesFactory();
@@ -23,6 +26,8 @@ public:
 	ABaseMovableShape* CreateShape(AActor* EndPoint);
 	virtual ABaseMovableShape* CreateShape_Implementation(AActor* EndPoint)
 		PURE_VIRTUAL(AMovableShapesFactory::CreateShape, return nullptr;);
+
+	static bool SpawnMovableShapeActor(const TSubclassOf<class AMovableShapesFactory>& FactoryClass, const UWorld* World, AActor* EndPointActor);
 
 protected:
 	// Called when the game starts or when spawned

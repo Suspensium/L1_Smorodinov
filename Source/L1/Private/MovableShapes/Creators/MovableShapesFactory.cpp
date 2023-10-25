@@ -11,6 +11,43 @@ AMovableShapesFactory::AMovableShapesFactory()
 	PrimaryActorTick.bCanEverTick = true;
 }
 
+AMovableShapesFactory* AMovableShapesFactory::GetFactory(const TSubclassOf<AMovableShapesFactory>&FactoryClass, const UWorld * World)
+{
+	if (!FactoryClass || !World) return nullptr;
+
+	TArray<AActor*> FactoryActors;
+	UGameplayStatics::GetAllActorsOfClass(World, FactoryClass, FactoryActors);
+
+	if (FactoryActors.Num() > 0)
+	{
+		return Cast<AMovableShapesFactory>(FactoryActors[0]);
+	}
+
+	return nullptr;
+}
+
+bool AMovableShapesFactory::SpawnMovableShapeActor(const TSubclassOf<AMovableShapesFactory>& FactoryClass, const UWorld* World, AActor* EndPointActor)
+{
+	if (!FactoryClass || !World || !EndPointActor) return false;
+
+	TObjectPtr<AMovableShapesFactory> Factory = GetFactory(FactoryClass, World);
+
+	if (Factory)
+	{
+		TObjectPtr<ABaseMovableShape> NewShape = Factory->CreateShape(EndPointActor);
+		if (!NewShape)
+		{
+			// If no implementation in blueprints use C++
+			NewShape = Factory->CreateShape_Implementation(EndPointActor);
+			if (!NewShape) return false;
+		}
+	}
+	else
+		return false;
+
+	return true;
+}
+
 // Called when the game starts or when spawned
 void AMovableShapesFactory::BeginPlay()
 {

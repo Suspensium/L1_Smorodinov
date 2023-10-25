@@ -10,15 +10,20 @@ void ARollingTrunk::SpawnTrunkOverTime()
 
 	FTransform SpawnTransformation{ GetActorTransform() };
 
-	// Spawn the Trunk Actor
-	SpawnedTrunk = World->SpawnActor(Actor, &SpawnTransformation);
+	// Spawn the Trunk Actor and push it to queue
+	SpawnedTrunks.push(World->SpawnActor(Actor, &SpawnTransformation));
 
-	if (TObjectPtr<UStaticMeshComponent> TrunkMesh = SpawnedTrunk->FindComponentByClass<UStaticMeshComponent>())
+	if (TObjectPtr<UStaticMeshComponent> TrunkMesh = SpawnedTrunks.back()->FindComponentByClass<UStaticMeshComponent>())
 	{
 		// Add impulse to mesh
-		FVector Impulse(0., 0., -3000.);
 		TrunkMesh->AddImpulse(Impulse, NAME_None, true);
 	}
+}
+
+void ARollingTrunk::DestroyTrunkOverTime()
+{
+	if (!SpawnedTrunks.empty())
+		SpawnedTrunks.front()->Destroy();
 }
 
 // Sets default values
@@ -34,8 +39,13 @@ void ARollingTrunk::BeginPlay()
 {
 	Super::BeginPlay();
 
+	FTimerHandle TrunkSpawnHandle{};
+	FTimerHandle TrunkDestructionHandle{};
+
 	// Set timer to spawn trunk every SpawnTime seconds
 	GetWorldTimerManager().SetTimer(TrunkSpawnHandle, this, &ARollingTrunk::SpawnTrunkOverTime, SpawnTime, true, 0.f);
+	// Set timer to destroy trunk every DestroyTime seconds
+	GetWorldTimerManager().SetTimer(TrunkDestructionHandle, this, &ARollingTrunk::DestroyTrunkOverTime, DestroyTime, true);
 }
 
 // Called every frame

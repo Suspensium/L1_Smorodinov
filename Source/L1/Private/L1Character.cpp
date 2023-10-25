@@ -9,7 +9,6 @@
 #include "GameFramework/SpringArmComponent.h"
 #include "EnhancedInputComponent.h"
 #include "EnhancedInputSubsystems.h"
-#include "MovableShapes/FactoryUtility.h"
 #include "MovableShapes/Creators/MovableStraightShapesFactory.h"
 #include "MovableShapes/Creators/MovableSineShapesFactory.h"
 #include "MovableShapes/Creators/MovableSpiralShapesFactory.h"
@@ -130,14 +129,14 @@ void AL1Character::Look(const FInputActionValue& Value)
 
 void AL1Character::SpawnStraightActor(const FInputActionValue& Value)
 {
-	FactoryUtility::SpawnMovableShapeActor(AMovableStraightShapesFactory::StaticClass(), GetWorld(), this);
+	AMovableStraightShapesFactory::SpawnMovableShapeActor(AMovableStraightShapesFactory::StaticClass(), GetWorld(), this);
 }
 void AL1Character::SpawnSineActor(const FInputActionValue& Value)
 {
-	FactoryUtility::SpawnMovableShapeActor(AMovableSineShapesFactory::StaticClass(), GetWorld(), this);
+	AMovableStraightShapesFactory::SpawnMovableShapeActor(AMovableSineShapesFactory::StaticClass(), GetWorld(), this);
 }
 void AL1Character::SpawnSpiralActor(const FInputActionValue& Value)
 {
-	FactoryUtility::SpawnMovableShapeActor(AMovableSpiralShapesFactory::StaticClass(), GetWorld(), this);
+	AMovableStraightShapesFactory::SpawnMovableShapeActor(AMovableSpiralShapesFactory::StaticClass(), GetWorld(), this);
 }
 #pragma endregion Inputs

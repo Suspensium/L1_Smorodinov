@@ -2,6 +2,7 @@
 
 #pragma once
 
+#include <queue>
 #include "CoreMinimal.h"
 #include "UObject/ObjectPtr.h"
 #include "GameFramework/Actor.h"
@@ -12,20 +13,25 @@ class ARollingTrunk : public AActor
 {
 	GENERATED_BODY()
 
-	FTimerHandle TrunkSpawnHandle{};
-
 	UPROPERTY(EditAnywhere)
 	// How often in seconds should trunks spawn
 	float SpawnTime{ 5.f };
-	UPROPERTY(EditDefaultsOnly)
+	UPROPERTY(EditAnywhere)
+	// Time before trunk deletion
+	float DestroyTime{ 6.f };
+	UPROPERTY(EditAnywhere)
+	// Starting impulse
+	FVector Impulse{ 0., 0., -3000. };
 	// Trunk actor
+	UPROPERTY(EditDefaultsOnly)
 	TSubclassOf<AActor> Actor;
 
-	// Smart pointer to spawned actor
-	TObjectPtr<AActor> SpawnedTrunk{ nullptr };
+	// Pointers queue to actors spawned
+	std::queue<TObjectPtr<AActor>> SpawnedTrunks{ };
 
 	// Spawn a trunk, removing previous one
 	void SpawnTrunkOverTime();
+	void DestroyTrunkOverTime();
 
 public:
 	// Sets default values for this actor's properties
