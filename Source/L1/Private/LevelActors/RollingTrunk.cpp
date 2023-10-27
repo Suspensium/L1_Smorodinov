@@ -12,8 +12,7 @@ void ARollingTrunk::SpawnTrunkOverTime()
 
 	// Spawn the Trunk Actor and push it to queue
 	SpawnedTrunks.push(World->SpawnActor(Actor, &SpawnTransformation));
-
-	if (TObjectPtr<UStaticMeshComponent> TrunkMesh = SpawnedTrunks.back()->FindComponentByClass<UStaticMeshComponent>())
+	if (TObjectPtr<UStaticMeshComponent> TrunkMesh{ SpawnedTrunks.back()->FindComponentByClass<UStaticMeshComponent>() })
 	{
 		// Add impulse to mesh
 		TrunkMesh->AddImpulse(Impulse, NAME_None, true);
@@ -30,7 +29,7 @@ void ARollingTrunk::DestroyTrunkOverTime()
 ARollingTrunk::ARollingTrunk()
 {
 	// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don't need it.
-	PrimaryActorTick.bCanEverTick = true;
+	PrimaryActorTick.bCanEverTick = false;
 
 }
 
@@ -54,4 +53,3 @@ void ARollingTrunk::Tick(float DeltaTime)
 	Super::Tick(DeltaTime);
 
 }
-

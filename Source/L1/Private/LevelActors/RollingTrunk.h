@@ -13,6 +13,7 @@ class ARollingTrunk : public AActor
 {
 	GENERATED_BODY()
 
+private:
 	UPROPERTY(EditAnywhere)
 	// How often in seconds should trunks spawn
 	float SpawnTime{ 5.f };
@@ -33,10 +34,6 @@ class ARollingTrunk : public AActor
 	void SpawnTrunkOverTime();
 	void DestroyTrunkOverTime();
 
-public:
-	// Sets default values for this actor's properties
-	ARollingTrunk();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -44,5 +41,6 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	// Sets default values for this actor's properties
+	ARollingTrunk();
 };

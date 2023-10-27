@@ -13,24 +13,13 @@ void AMineCart::FillCartWithActors(const TSet<TSubclassOf<AActor>>& Actors, int 
 	FVector LocationOffset{};
 	FVector Origin{};
 	FVector ActorBounds{};
-	// Random X axis in bounds of cart length
-	double RandomX{};
-	// Random Y axis in bounds of cart width
-	double RandomY{};
-	// Random Z axis from cart base and upward
-	double RandomZ{};
 	GetActorBounds(true, Origin, ActorBounds);
 	FTransform ActorTransform{ GetActorTransform() };
 
-
-	for (auto& Actor : Actors)
-		for (int i = 0; i < Count; i++)
+	for (const auto& Actor : Actors)
+		for (uint16 i{ 0 }; i < Count; ++i)
 		{
-			RandomX = FMath::RandRange(-ActorBounds.X / 8., ActorBounds.X / 8.);
-			RandomY = FMath::RandRange(-ActorBounds.Y / 8., ActorBounds.Y / 8.);
-			RandomZ = FMath::RandRange(3., 6.);
-
-			LocationOffset = FVector(RandomX, RandomY, RandomZ);
+			LocationOffset = FVector(0., 0., ActorBounds.Z / 4.);
 			ActorTransform.AddToTranslation(LocationOffset);
 			World->SpawnActor(Actor, &ActorTransform);
 		}

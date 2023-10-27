@@ -11,6 +11,7 @@ class AMineCart : public AActor
 {
 	GENERATED_BODY()
 
+private:
 	UPROPERTY(EditInstanceOnly)
 	// Is filled with coal
 	bool bFilled{ false };
@@ -19,10 +20,6 @@ class AMineCart : public AActor
 	// Fill a cart with actors from set
 	void FillCartWithActors(const TSet<TSubclassOf<AActor>>& Actors, int Count = 10);
 
-public:
-	// Sets default values for this actor's properties
-	AMineCart();
-
 protected:
 	// Called when the game starts or when spawned
 	virtual void BeginPlay() override;
@@ -30,5 +27,6 @@ protected:
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
-
+	// Sets default values for this actor's properties
+	AMineCart();
 };
